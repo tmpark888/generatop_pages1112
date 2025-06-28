@@ -100,6 +100,55 @@
             resize: vertical;
         }
 
+        .cases-section {
+            background: rgba(255, 165, 0, 0.1);
+            border: 2px solid #ffa500;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .cases-section h3 {
+            color: #ffa500;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .cases-editor {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .case-card {
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid #ffa500;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .case-card label {
+            color: #ffa500;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .case-card textarea {
+            width: 100%;
+            height: 120px;
+            padding: 10px;
+            border: 1px solid #ffa500;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-family: Georgia, serif;
+            resize: vertical;
+            font-size: 12px;
+        }
+
         .generate-btn {
             display: block;
             width: 100%;
@@ -233,9 +282,9 @@
             <!-- Blessing cards will be generated here -->
         </div>
 
-        <div class="controls">
-            <h3 style="color: #ffd700; text-align: center; margin-bottom: 20px;">Bottom Page Cases (5 different templates will rotate)</h3>
-            <div class="blessing-editor" id="casesEditor">
+        <div class="cases-section">
+            <h3>🎯 Bottom Page Cases (5 different templates will rotate automatically)</h3>
+            <div class="cases-editor" id="casesEditor">
                 <!-- Case cards will be generated here -->
             </div>
         </div>
@@ -266,6 +315,39 @@
         
         const daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         
+        const defaultBlessings = [
+            "The 7th seal of Solomon's prosperity opens for you today. Ancient rivers of gold flow toward your soul.",
+            "Sacred energies of my canonized ancestor activate your prosperity consciousness now. You are chosen.",
+            "Divine abundance seeks you through bloodlines of power. Write your intention and let ancient wealth find you.",
+            "The Orthodox mysteries whisper your name. Today, millionaire frequency aligns with your aura.",
+            "Angelic forces of my lineage surround your finances. Supernatural breakthrough incoming.",
+            "Sacred flames of abundance ignite within your spirit. The wealth of centuries flows through you now.",
+            "Ancient prosperity codes embedded in your DNA activate today. Your millionaire destiny awakens.",
+            "The golden thread of my bloodline connects to your soul. Infinite abundance channels through this sacred link.",
+            "Celestial vaults of prosperity unlock for your spirit. Divine wealth streams descend upon you.",
+            "The sacred fire of financial transformation burns within you. Old money blocks dissolve completely.",
+            "Mystical forces align to manifest your deepest wealth desires. The universe conspires for your abundance.",
+            "Ancestral wealth wisdom flows through your consciousness. Ancient secrets of prosperity reveal themselves.",
+            "The Orthodox cross of abundance blesses your financial path. Sacred protection surrounds your money flow.",
+            "Divine money magnetism awakens in your aura. You become an irresistible attractor of wealth.",
+            "The sacred number of your birth date unlocks hidden treasure chambers. Abundance seeks you actively.",
+            "Angelic guardians of prosperity take position around you. Your wealth protection is now complete.",
+            "The mystical key to unlimited abundance turns in your favor. All financial doors open before you.",
+            "Sacred geometry of wealth aligns with your life purpose. Your prosperity path becomes crystal clear.",
+            "The golden light of my lineage illuminates your money consciousness. Millionaire thoughts flood your mind.",
+            "Ancient prosperity rituals activate through your daily practice. Every action multiplies your wealth potential.",
+            "The sacred waters of abundance cleanse your financial karma. Pure prosperity energy flows freely now.",
+            "Divine intervention manifests through unexpected money opportunities. Your breakthrough moment has arrived.",
+            "The mystical rose of prosperity blooms in your heart. Love and abundance merge in perfect harmony.",
+            "Sacred numerology of your soul reveals hidden wealth patterns. Your unique abundance code activates today.",
+            "The Orthodox bell of prosperity rings for your awakening. Divine timing aligns with your money goals.",
+            "Celestial merchants of abundance gather around your spirit. Supernatural business opportunities multiply rapidly.",
+            "The sacred scroll of your wealth destiny unrolls before you. Every step leads to greater prosperity.",
+            "Ancient alchemy transforms your relationship with money. Lead thoughts become golden manifestations.",
+            "The mystical crown of financial sovereignty rests upon your head. You rule your abundance kingdom now.",
+            "Divine completion of your prosperity cycle draws near. The ultimate money breakthrough crystallizes within reach."
+        ];
+
         const defaultCases = [
             // Template 1 - Business Women
             `*** RECENT SACRED CONFIRMATIONS:
@@ -306,37 +388,6 @@ Personal Akashic Records Reading & Prosperity Activation`,
 
 *** YOUR CUSTOM ACTIVATION IS READY:
 Personal Wealth Frequency Attunement designed for your energy signature`
-        const defaultBlessings = [
-            "The 7th seal of Solomon's prosperity opens for you today. Ancient rivers of gold flow toward your soul.",
-            "Sacred energies of my canonized ancestor activate your prosperity consciousness now. You are chosen.",
-            "Divine abundance seeks you through bloodlines of power. Write your intention and let ancient wealth find you.",
-            "The Orthodox mysteries whisper your name. Today, millionaire frequency aligns with your aura.",
-            "Angelic forces of my lineage surround your finances. Supernatural breakthrough incoming.",
-            "Sacred flames of abundance ignite within your spirit. The wealth of centuries flows through you now.",
-            "Ancient prosperity codes embedded in your DNA activate today. Your millionaire destiny awakens.",
-            "The golden thread of my bloodline connects to your soul. Infinite abundance channels through this sacred link.",
-            "Celestial vaults of prosperity unlock for your spirit. Divine wealth streams descend upon you.",
-            "The sacred fire of financial transformation burns within you. Old money blocks dissolve completely.",
-            "Mystical forces align to manifest your deepest wealth desires. The universe conspires for your abundance.",
-            "Ancestral wealth wisdom flows through your consciousness. Ancient secrets of prosperity reveal themselves.",
-            "The Orthodox cross of abundance blesses your financial path. Sacred protection surrounds your money flow.",
-            "Divine money magnetism awakens in your aura. You become an irresistible attractor of wealth.",
-            "The sacred number of your birth date unlocks hidden treasure chambers. Abundance seeks you actively.",
-            "Angelic guardians of prosperity take position around you. Your wealth protection is now complete.",
-            "The mystical key to unlimited abundance turns in your favor. All financial doors open before you.",
-            "Sacred geometry of wealth aligns with your life purpose. Your prosperity path becomes crystal clear.",
-            "The golden light of my lineage illuminates your money consciousness. Millionaire thoughts flood your mind.",
-            "Ancient prosperity rituals activate through your daily practice. Every action multiplies your wealth potential.",
-            "The sacred waters of abundance cleanse your financial karma. Pure prosperity energy flows freely now.",
-            "Divine intervention manifests through unexpected money opportunities. Your breakthrough moment has arrived.",
-            "The mystical rose of prosperity blooms in your heart. Love and abundance merge in perfect harmony.",
-            "Sacred numerology of your soul reveals hidden wealth patterns. Your unique abundance code activates today.",
-            "The Orthodox bell of prosperity rings for your awakening. Divine timing aligns with your money goals.",
-            "Celestial merchants of abundance gather around your spirit. Supernatural business opportunities multiply rapidly.",
-            "The sacred scroll of your wealth destiny unrolls before you. Every step leads to greater prosperity.",
-            "Ancient alchemy transforms your relationship with money. Lead thoughts become golden manifestations.",
-            "The mystical crown of financial sovereignty rests upon your head. You rule your abundance kingdom now.",
-            "Divine completion of your prosperity cycle draws near. The ultimate money breakthrough crystallizes within reach."
         ];
 
         const triggers = [
@@ -373,6 +424,7 @@ Personal Wealth Frequency Attunement designed for your energy signature`
                 return;
             }
             
+            // Initialize blessings
             for (let i = 1; i <= 30; i++) {
                 const card = document.createElement('div');
                 card.className = 'blessing-card';
@@ -390,15 +442,15 @@ Personal Wealth Frequency Attunement designed for your energy signature`
             // Initialize cases editor
             const casesEditor = document.getElementById('casesEditor');
             if (casesEditor) {
+                const templateNames = ['Business Women', 'Families/Moms', 'Young People', 'Spiritual Seekers', 'General Success'];
+                
                 for (let i = 1; i <= 5; i++) {
                     const card = document.createElement('div');
-                    card.className = 'blessing-card';
-                    
-                    const templateNames = ['Business Women', 'Families/Moms', 'Young People', 'Spiritual Seekers', 'General Success'];
+                    card.className = 'case-card';
                     
                     card.innerHTML = `
                         <label for="case${i}">Template ${i} - ${templateNames[i-1]}:</label>
-                        <textarea id="case${i}" placeholder="Enter case template..." style="height: 120px;">${defaultCases[i - 1] || ''}</textarea>
+                        <textarea id="case${i}" placeholder="Enter case template...">${defaultCases[i - 1] || ''}</textarea>
                     `;
                     
                     casesEditor.appendChild(card);
@@ -416,7 +468,6 @@ Personal Wealth Frequency Attunement designed for your energy signature`
             }
         }
 
-        // Функция для создания текста без эмодзи - только обычные символы
         function createPageText(pageNumber, blessing, whatsapp, email) {
             const dayOfWeek = daysOfWeek[(pageNumber - 1) % 7];
             const triggerIndex = Math.floor((pageNumber - 1) / 5) % triggers.length;
@@ -460,6 +511,7 @@ Ready for your FULL million-dollar activation?
 ${pageNumber % 5 === 0 ? `\n*** ${trigger}` : ''}
 
 ${finalCaseText}
+
 WhatsApp Maria: ${whatsapp} | Email: ${email}
 
 Page ${pageNumber}`;
@@ -555,7 +607,7 @@ Page ${pageNumber}`;
                             pdf.setTextColor(255, 215, 0); // Gold color
                             pdf.setFontSize(16);
                             pdf.setFont('times', 'bold');
-                        } else if (line.includes('*** MARIA\'S SACRED') || line.includes('*** DIVINE MESSAGE') || line.includes('*** MY MONEY') || line.includes('*** ABUNDANCE SIGNS') || line.includes('*** GRATITUDE') || line.includes('*** FEELING')) {
+                        } else if (line.includes('*** MARIA\'S SACRED') || line.includes('*** DIVINE MESSAGE') || line.includes('*** MY MONEY') || line.includes('*** ABUNDANCE SIGNS') || line.includes('*** GRATITUDE') || line.includes('*** FEELING') || line.includes('*** RECENT SACRED') || line.includes('*** YOUR PERSONAL') || line.includes('*** BREAKTHROUGH')) {
                             pdf.setTextColor(255, 215, 0); // Gold color
                             pdf.setFontSize(13);
                             pdf.setFont('times', 'bold');
