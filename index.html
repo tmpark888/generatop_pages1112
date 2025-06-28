@@ -479,6 +479,9 @@ Personal Wealth Frequency Attunement designed for your energy signature`
             const caseText = caseElement ? caseElement.value.trim() : '';
             const finalCaseText = caseText || defaultCases[caseIndex] || '';
             
+            // ИСПРАВЛЕНО: Убираем условие и добавляем триггер только каждые 5 страниц
+            const triggerSection = pageNumber % 5 === 0 ? `\n*** ${trigger}\n` : '\n';
+            
             return `*** DAY ${pageNumber} - ${dayOfWeek} ***
 
 *** MARIA'S SACRED TRANSMISSION FOR YOU:
@@ -507,9 +510,7 @@ Ready for your FULL million-dollar activation?
 -> Or email: ${email}
 
 *** P.S. The fact that you felt drawn to page ${pageNumber} tells Maria everything about your spiritual readiness level...
-
-${pageNumber % 5 === 0 ? `\n*** ${trigger}` : ''}
-
+${triggerSection}
 ${finalCaseText}
 
 WhatsApp Maria: ${whatsapp} | Email: ${email}
@@ -607,7 +608,7 @@ Page ${pageNumber}`;
                             pdf.setTextColor(255, 215, 0); // Gold color
                             pdf.setFontSize(16);
                             pdf.setFont('times', 'bold');
-                        } else if (line.includes('*** MARIA\'S SACRED') || line.includes('*** DIVINE MESSAGE') || line.includes('*** MY MONEY') || line.includes('*** ABUNDANCE SIGNS') || line.includes('*** GRATITUDE') || line.includes('*** FEELING') || line.includes('*** RECENT SACRED') || line.includes('*** YOUR PERSONAL') || line.includes('*** BREAKTHROUGH')) {
+                        } else if (line.includes('*** MARIA\'S SACRED') || line.includes('*** DIVINE MESSAGE') || line.includes('*** MY MONEY') || line.includes('*** ABUNDANCE SIGNS') || line.includes('*** GRATITUDE') || line.includes('*** FEELING') || line.includes('*** RECENT SACRED') || line.includes('*** YOUR PERSONAL') || line.includes('*** BREAKTHROUGH') || line.includes('*** SACRED FAMILY') || line.includes('*** READY FOR') || line.includes('*** MILLENNIAL MONEY') || line.includes('*** YOUR GENERATIONAL') || line.includes('*** DIVINE INTERVENTION') || line.includes('*** YOUR SOUL\'S') || line.includes('*** YOUR CUSTOM')) {
                             pdf.setTextColor(255, 215, 0); // Gold color
                             pdf.setFontSize(13);
                             pdf.setFont('times', 'bold');
